@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <title>Библиотека</title>
+    <link rel="stylesheet" href="{% static 'styles/main.css' %}">
+</head>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script>
+    function filter_result() {
+        $.ajax({
+            url: "search/",
+            method: "GET",
+            data: {
+                fltr: $("#fltr").val()
+            },
+            success: function (data) {
+                console.log(data);
+                $("#books_result").html(data)
+            },
+            error: function (data) {
+                console.log(data);
+            }
+        });
+    }
+</script>
+<body>
+<div class="header">
+    <h1 class="head_h1">Список книг</h1>
+</div>
+<form method="GET">
+    <input type="text" id="fltr" placeholder="Поиск по автору или книге" oninput="filter_result()" value="{{ library.fltr }}">
+</form>
+<div id="center">
+    <div id="books_result">
+        {% include 'book_result.html' %}
+    </div>
+</div>
+<div class="footer">
+
+</div>
+</body>
+</html>

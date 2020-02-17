@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <title>Статистика</title>
+    <link rel="stylesheet" href="{% static 'styles/main.css' %}">
+</head>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script>
+    window.onload = function () {
+        $.ajax({
+            url: "books/",
+            method: "GET",
+            success: function (data) {
+                console.log(data);
+                $("#books_count").html("Всего книг: " + data['count'])
+            },
+            error: function (data) {
+                console.log(data);
+            }
+        });
+        $.ajax({
+            url: "authors/",
+            method: "GET",
+            success: function (data) {
+                console.log(data);
+                $("#authors_count").html("Всего авторов: " + data['count'])
+            },
+            error: function (data) {
+                console.log(data);
+            }
+        });
+    }
+</script>
+<body>
+<div class="header">
+    <h1 class="head_h1">Статистика</h1>
+</div>
+<div class="center">
+    <div class="book">
+        <p id="books_count">Идет подсчет количества кинг...</p>
+        <p id="authors_count">Идет подсчет количества авторов...</p>
+    </div>
+</div>
+<div class="footer">
+
+</div>
+</body>
+</html>

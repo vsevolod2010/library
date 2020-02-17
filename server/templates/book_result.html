@@ -1,0 +1,30 @@
+<div class="books">
+    {% for book in object_list %}
+    <div class="book">
+        <p class="book_title">{{ book.title }}</p>
+        <p class="book_annotation">{{ book.annotation }}</p>
+        <div class="authors">
+            <p class="book_author">{{ book.author_list }}</p>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+<div class="pagination">
+
+    {% if library.has_previous %}
+        <a href="?fltr={{ library.fltr }}&page={{ library.previous_page_number }}">←</a>
+    {% endif %}
+
+    {% for num in library.paginator.page_range %}
+        {% if num == library.number %}
+            <span class="current"><b>{{ num }}</b></span>
+        {% else %}
+            <a href="?fltr={{ library.fltr }}&page={{ num }}"> {{ num }}</a>
+        {% endif %}
+    {% endfor %}
+
+    {% if library.has_next %}
+        <a href="?fltr={{ library.fltr }}&page={{ library.next_page_number }}">→</a>
+    {% endif %}
+
+</div>
